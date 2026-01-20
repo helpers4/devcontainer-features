@@ -34,9 +34,9 @@ jobs:
           - features: angular-dev
             baseImage: mcr.microsoft.com/devcontainers/javascript-node:20
 
-          # local-mounts - basic validation (mounts depend on host)
-          - features: local-mounts
-            baseImage: mcr.microsoft.com/devcontainers/base:ubuntu
+          # local-mounts - SKIPPED: uses ${localEnv:...} syntax that cannot be tested in CI
+          # The mounts and containerEnv with localEnv variables are evaluated at runtime
+          # by VS Code/devcontainer CLI, not during docker build
 
     steps:
       - name: Checkout
