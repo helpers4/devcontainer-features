@@ -1,0 +1,40 @@
+{
+  "id": "angular-dev",
+  "version": "1.0.0",
+  "name": "Angular Development Environment",
+  "description": "Angular-specific development environment with port forwarding, VS Code extensions, and CLI autocompletion.",
+  "documentationURL": "https://github.com/helpers4/devcontainer-features/tree/main/src/angular-dev",
+  "options": {
+    "installCli": {
+      "type": "boolean",
+      "default": false,
+      "description": "Install Angular CLI globally (set to true if not using another feature for CLI installation)"
+    }
+  },
+  "installsAfter": [
+    "ghcr.io/devcontainers/features/common-utils",
+    "ghcr.io/devcontainers/features/node"
+  ],
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "angular.ng-template",
+        "johnpapa.angular2",
+        "infinity1207.angular2-switcher",
+        "alexiv.vscode-angular2-files",
+        "obenjiro.arrr",
+        "john-crowson.angular-file-changer",
+        "cyrilletuzi.angular-schematics"
+      ]
+    }
+  },
+  "forwardPorts": [
+    4200
+  ],
+  "portsAttributes": {
+    "4200": {
+      "label": "Angular Dev Server",
+      "onAutoForward": "notify"
+    }
+  }
+}
