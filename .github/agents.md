@@ -199,6 +199,11 @@ This project follows [Conventional Commits](https://www.conventionalcommits.org/
 4. Create `test/<feature-name>/test.sh`
 5. Update main `README.md`
 6. Update this `agents.md` file
+7. **IMPORTANT: Update `.github/workflows/test.yml`** - Add the new feature to the test matrix with appropriate base image
+   - Shell features: Use any base image (debian, ubuntu, devcontainers/base)
+   - Node.js features: Use `mcr.microsoft.com/devcontainers/javascript-node:20` or higher
+   - TypeScript features: Use `mcr.microsoft.com/devcontainers/typescript-node:20` or higher
+   - Features with mounts: Can test with Node.js base image (mounts are optional)
 
 ### Dependencies
 All features declare `installsAfter: ["ghcr.io/devcontainers/features/common-utils"]`
