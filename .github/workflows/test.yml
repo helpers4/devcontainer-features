@@ -34,9 +34,17 @@ jobs:
           - features: angular-dev
             baseImage: mcr.microsoft.com/devcontainers/javascript-node:20
 
-          # local-mounts - SKIPPED: uses ${localEnv:...} syntax that cannot be tested in CI
-          # The mounts and containerEnv with localEnv variables are evaluated at runtime
-          # by VS Code/devcontainer CLI, not during docker build
+          # package-auto-install - requires Node.js
+          - features: package-auto-install
+            baseImage: mcr.microsoft.com/devcontainers/javascript-node:20
+
+          # vite-plus - requires Node.js
+          - features: vite-plus
+            baseImage: mcr.microsoft.com/devcontainers/typescript-node:20
+
+          # typescript-dev - requires VS Code (extensions only, no install.sh logic)
+          - features: typescript-dev
+            baseImage: mcr.microsoft.com/devcontainers/typescript-node:20
 
     steps:
       - name: Checkout
