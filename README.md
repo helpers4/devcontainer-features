@@ -84,6 +84,21 @@ Mounts local Git, SSH, GPG, and npm configuration files into the devcontainer fo
 
 [📖 Documentation](./src/local-mounts/README.md)
 
+### typescript-dev
+
+Complete TypeScript/JavaScript development setup with Git integration, AI assistance, Markdown support, and essential editor enhancements. Perfect base for all TypeScript/JavaScript projects.
+
+**Key benefits:**
+- Latest TypeScript with indexing and import management
+- Git integration with history, graph visualization, and PR support
+- GitHub Copilot for AI-powered code assistance
+- Complete Markdown support with preview and linting
+- Multi-cursor, code comparison, and local file history
+- YAML, JSON, CSV file format support out-of-the-box
+- Works out-of-the-box with zero configuration
+
+[📖 Documentation](./src/typescript-dev/README.md)
+
 ## Usage
 
 Features from this repository are available via GitHub Container Registry. Reference them in your `devcontainer.json`:
@@ -93,6 +108,7 @@ Features from this repository are available via GitHub Container Registry. Refer
     "features": {
         "ghcr.io/helpers4/devcontainer/vite-plus:1": {},
         "ghcr.io/helpers4/devcontainer/package-auto-install:1": {},
+        "ghcr.io/helpers4/devcontainer/typescript-dev:1": {},
         "ghcr.io/helpers4/devcontainer/angular-dev:1": {},
         "ghcr.io/helpers4/devcontainer/shell-history-per-project:1": {},
         "ghcr.io/helpers4/devcontainer/git-absorb:1": {},
@@ -107,6 +123,7 @@ Features from this repository are available via GitHub Container Registry. Refer
 |---------|-------------|---------------|
 | [vite-plus](./src/vite-plus) | Complete Vite+ toolchain with Oxc, Vitest, and VS Code integration | [README](./src/vite-plus/README.md) |
 | [package-auto-install](./src/package-auto-install) | Automatic package installation with corepack support for Node 24+ | [README](./src/package-auto-install/README.md) |
+| [typescript-dev](./src/typescript-dev) | Complete TypeScript/JavaScript dev environment with Git, AI, and Markdown support | [README](./src/typescript-dev/README.md) |
 | [angular-dev](./src/angular-dev) | Angular development environment with extensions and CLI autocompletion | [README](./src/angular-dev/README.md) |
 | [shell-history-per-project](./src/shell-history-per-project) | Per-project shell history persistence with multi-shell auto-detection | [README](./src/shell-history-per-project/README.md) |
 | [git-absorb](./src/git-absorb) | Automatic absorption of staged changes into logical commits | [README](./src/git-absorb/README.md) |
@@ -115,46 +132,6 @@ Features from this repository are available via GitHub Container Registry. Refer
 ## Development
 
 This repository follows the [DevContainer Features specification](https://containers.dev/implementors/features/) and is compatible with the [DevContainer Features distribution](https://containers.dev/implementors/features-distribution/).
-
-### Repository Structure
-
-```
-.package-auto-install/
-│   │   ├── devcontainer-feature.json
-│   │   ├── install.sh
-│   │   └── README.md
-│   ├── angular-dev/
-│   │   ├── devcontainer-feature.json
-│   │   ├── install.sh
-│   │   └── README.md
-│   ├── git-absorb/
-│   │   ├── devcontainer-feature.json
-│   │   ├── install.sh
-│   │   └── README.md
-│   ├── local-mounts/
-│   │   ├── devcontainer-feature.json
-│   │   ├── install.sh
-│   │   └── README.md
-│   └── shell-history-per-project/
-│       ├── devcontainer-feature.json
-│       ├── install.sh
-│       └── README.md
-├── test/
-│   ├── package-auto-install/
-│   │   └── test.sh── install.sh
-│       └── README.md
-├── test/
-│   ├── angular-dev/
-│   │   └── test.sh
-│   ├── git-absorb/
-│   │   └── test.sh
-│   ├── local-mounts/
-│   │   └── test.sh
-│   └── shell-history-per-project/
-│       └── test.sh
-└── README.mdpackage-auto-install
-devcontainer features test --features 
-```
 
 ### Testing
 
