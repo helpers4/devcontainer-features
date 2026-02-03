@@ -1,6 +1,6 @@
 {
   "id": "vite-plus",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "name": "Vite+ Development Environment",
   "description": "Complete Vite+ toolchain setup with VS Code extensions, Oxc formatter/linter, Vitest, and optimized configuration.",
   "documentationURL": "https://github.com/helpers4/devcontainer/tree/main/src/vite-plus",
@@ -35,7 +35,8 @@
     "vscode": {
       "extensions": [
         "oxc.oxc-vscode",
-        "vitest.explorer"
+        "vitest.explorer",
+        "deinsoftware.vitest-snippets"
       ],
       "settings": {
         "oxc.enable": true,
