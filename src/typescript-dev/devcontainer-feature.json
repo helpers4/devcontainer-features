@@ -1,6 +1,6 @@
 {
   "id": "typescript-dev",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "name": "TypeScript Development Environment",
   "description": "Complete TypeScript/JavaScript development setup with Git integration, AI assistance, Markdown support, and editor enhancements.",
   "documentationURL": "https://github.com/helpers4/devcontainer/tree/main/src/typescript-dev",
@@ -12,6 +12,9 @@
         "guilhermetheodoro.typescript-indexing",
         "christian-kohler.npm-intellisense",
         "christian-kohler.path-intellisense",
+        "YoavBls.pretty-ts-errors",
+        "steoates.autoimport",
+        "stringham.move-ts",
         // Git & Version Control
         "eamodio.gitlens",
         "donjayamanne.githistory",
@@ -26,14 +29,23 @@
         "cardinal90.multi-cursor-case-preserve",
         "moshfeu.compare-folders",
         "xyz.local-history",
+        "editorconfig.editorconfig",
         // Markdown and Documentation
         "yzhang.markdown-all-in-one",
         "davidanson.vscode-markdownlint",
         "bierner.markdown-mermaid",
         // File Format Support
         "redhat.vscode-yaml",
+        "redhat.vscode-xml",
         "ms-vscode.vscode-json",
-        "mechatroner.rainbow-csv"
+        "adamraichu.zip-viewer",
+        "mechatroner.rainbow-csv",
+        "ms-vscode.makefile-tools",
+        // HTML & CSS Intelligence
+        "ecmel.vscode-html-css",
+        "formulahendry.auto-rename-tag",
+        // Code Generation
+        "quicktype.quicktype"
       ],
       "settings": {
         "editor.formatOnSave": true,
