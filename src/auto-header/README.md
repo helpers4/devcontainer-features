@@ -220,6 +220,13 @@ h4-init-headers
 2. Check `.vscode/settings.json` exists and has correct config
 3. Restart VS Code or reload window: `Ctrl+Shift+P` → "Developer: Reload Window"
 
+### Year not updating automatically
+
+The headers are generated with fixed copyright years (e.g., `2024-2026`) at the time the devcontainer is created. If you want the year to automatically update:
+
+1. Rebuild the devcontainer to regenerate the configuration with current year
+2. Or manually update the copyright years in `.vscode/settings.json`
+
 ## Integration with helpers4 Projects
 
 This feature complements the helpers4 development environment:
