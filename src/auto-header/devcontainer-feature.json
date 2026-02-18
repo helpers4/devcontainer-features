@@ -26,18 +26,22 @@
     },
     "company": {
       "type": "string",
+      "default": "",
       "description": "Company or organization name (optional)"
     },
     "contributors": {
       "type": "string",
+      "default": "",
       "description": "Comma-separated list of contributors (optional)"
     },
     "sinceYear": {
       "type": "string",
+      "default": "",
       "description": "Copyright start year (optional, defaults to current year if not provided)"
     },
     "customHeaderLines": {
       "type": "string",
+      "default": "",
       "description": "Custom header content (required when headerType is 'custom'). Multiple lines separated by \\n"
     }
   },
