@@ -1,0 +1,50 @@
+{
+  "id": "auto-header",
+  "version": "1.0.0",
+  "name": "Automatic File Headers",
+  "description": "Automatically configures VS Code file headers with customizable templates based on project, license, company, and contributors information.",
+  "documentationURL": "https://github.com/helpers4/devcontainer/tree/main/src/auto-header",
+  "options": {
+    "headerType": {
+      "type": "string",
+      "enum": [
+        "simple",
+        "custom"
+      ],
+      "default": "simple",
+      "description": "Header style: 'simple' (project + copyright + license) or 'custom' (user-defined lines)"
+    },
+    "projectName": {
+      "type": "string",
+      "description": "Project name to include in headers (uses current directory name if not provided)"
+    },
+    "license": {
+      "type": "string",
+      "default": "MIT",
+      "description": "SPDX license identifier (e.g., MIT, Apache-2.0, AGPL-3.0)"
+    },
+    "company": {
+      "type": "string",
+      "description": "Company or organization name (optional)"
+    },
+    "contributors": {
+      "type": "string",
+      "description": "Comma-separated list of contributors (optional)"
+    },
+    "sinceYear": {
+      "type": "string",
+      "description": "Copyright start year (optional, defaults to current year if not provided)"
+    },
+    "customHeaderLines": {
+      "type": "string",
+      "description": "Custom header content (required when headerType is 'custom'). Multiple lines separated by \\n"
+    }
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "psioniq.psi-header"
+      ]
+    }
+  }
+}
