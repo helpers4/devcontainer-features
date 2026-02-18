@@ -16,7 +16,8 @@
     },
     "projectName": {
       "type": "string",
-      "description": "Project name to include in headers (uses current directory name if not provided)"
+      "default": "",
+      "description": "Project name to include in headers (auto-detects from directory name if empty)"
     },
     "license": {
       "type": "string",
