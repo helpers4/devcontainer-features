@@ -124,78 +124,94 @@ else
     COPYRIGHT_YEARS="$SINCE_YEAR-$CURRENT_YEAR"
 fi
 
-# Generate psi-header configuration
-if [ "$HEADER_TYPE" = "simple" ]; then
-    # Simple header format
-    HEADER_LINES="[
-      \"// This file is part of $PROJECT_NAME.\",
-      \"// Copyright (C) $COPYRIGHT_YEARS $COPYRIGHT_ENTITY\",
-      \"// SPDX-License-Identifier: $LICENSE\"
-    ]"
-    BEFORE="\"// This file is part of\""
-else
-    # Custom header format
-    # Convert escaped newlines to actual array elements
-    HEADER_LINES=$(echo "$CUSTOM_HEADER_LINES" | awk -F'\n' '{
-        for (i=1; i<=NF; i++) {
-            gsub(/^[[:space:]]+|[[:space:]]+$/, "", $i)
-            if ($i != "") {
-                gsub(/"/, "\\\"", $i)
-                printf "      \"%s\"%s\n", $i, (i < NF ? "," : "")
-            }
-        }
-    }')
-    HEADER_LINES="[
-$HEADER_LINES
-    ]"
-    BEFORE=$(echo "$CUSTOM_HEADER_LINES" | head -1 | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
-    BEFORE="\"${BEFORE:0:30}\""
-fi
-
-# Create psi-header extension settings
+# Generate psi-header configuration with real values (not variables, PSI Header doesn't support custom variables)
 PSI_HEADER_CONFIG="{
   \"psi-header.config\": {
-    \"forceToTop\": true,
-    \"fineGrainedMode\": false,
-    \"initials\": [],
-    \"authorName\": \"$COPYRIGHT_ENTITY\",
+    \"author\": \"$COPYRIGHT_ENTITY\",
     \"authorEmail\": \"\",
-    \"source\": \"defaultHeader\",
-    \"sourceHeader\": [
-      \"/*!\",
-      \" * File: <<filename>>\",
-      \" * Project: $PROJECT_NAME\",
-      \" * License: $LICENSE\",
-      \" */\"
+    \"license\": \"Custom\",
+    \"company\": \"${COMPANY:-}\",
+    \"forceToTop\": true
+  },
+  \"psi-header.templates\": [
+    {
+      \"language\": \"typescript\",
+      \"template\": [
+        \"This file is part of $PROJECT_NAME.\",
+        \"Copyright (C) $COPYRIGHT_YEARS $COPYRIGHT_ENTITY\",
+        \"SPDX-License-Identifier: $LICENSE\"
+      ]
+    },
+    {
+      \"language\": \"javascript\",
+      \"template\": [
+        \"This file is part of $PROJECT_NAME.\",
+        \"Copyright (C) $COPYRIGHT_YEARS $COPYRIGHT_ENTITY\",
+        \"SPDX-License-Identifier: $LICENSE\"
+      ]
+    },
+    {
+      \"language\": \"python\",
+      \"template\": [
+        \"This file is part of $PROJECT_NAME.\",
+        \"Copyright (C) $COPYRIGHT_YEARS $COPYRIGHT_ENTITY\",
+        \"SPDX-License-Identifier: $LICENSE\"
+      ]
+    },
+    {
+      \"language\": \"shell\",
+      \"template\": [
+        \"This file is part of $PROJECT_NAME.\",
+        \"Copyright (C) $COPYRIGHT_YEARS $COPYRIGHT_ENTITY\",
+        \"SPDX-License-Identifier: $LICENSE\"
+      ]
+    }
+  ],
+  \"psi-header.changes-tracking\": {
+    \"isActive\": true,
+    \"modAuthor\": \"$COPYRIGHT_ENTITY\",
+    \"modDate\": \" - modDate\",
+    \"modDateFormat\": \"dd/MM/yyyy\",
+    \"include\": [
+      \"typescript\",
+      \"javascript\",
+      \"python\",
+      \"shell\"
     ],
-    \"header\": $HEADER_LINES,
-    \"mapLines\": {},
-    \"changes\": [
-      {
-        \"regex\": \"@modified\",
-        \"replaceWith\": \"@modified \$MOD\",
-        \"yearOnly\": false,
-        \"notMatch\": \"^minute\",
-        \"isMultiline\": false
-      }
-    ],
-    \"changeFrequency\": \"fileChange\",
-    \"modAuthor\": \"Modified by $COPYRIGHT_ENTITY\",
-    \"modDate\": true,
-    \"modHour\": false,
-    \"modMinute\": false,
-    \"modYear\": true,
     \"exclude\": [
-      \"node_modules\",
-      \".git\",
-      \"dist\",
-      \"build\",
-      \"coverage\"
-    ],
-    \"autoHeader\": \"autoSave\",
-    \"update\": false,
-    \"updateYear\": true
-  }
+      \"plaintext\"
+    ]
+  },
+  \"psi-header.lang-config\": [
+    {
+      \"language\": \"typescript\",
+      \"begin\": \"/**\",
+      \"prefix\": \" * \",
+      \"end\": \" */\",
+      \"blankLinesAfter\": 1
+    },
+    {
+      \"language\": \"javascript\",
+      \"begin\": \"/**\",
+      \"prefix\": \" * \",
+      \"end\": \" */\",
+      \"blankLinesAfter\": 1
+    },
+    {
+      \"language\": \"python\",
+      \"begin\": \"###\",
+      \"prefix\": \"# \",
+      \"end\": \"###\",
+      \"blankLinesAfter\": 1
+    },
+    {
+      \"language\": \"shell\",
+      \"begin\": \"\",
+      \"prefix\": \"# \",
+      \"end\": \"\",
+      \"blankLinesAfter\": 1
+    }
+  ]
 }"
 
 echo "📝 Generating psi-header configuration..."
@@ -206,13 +222,21 @@ echo "$PSI_HEADER_CONFIG" | python3 -m json.tool > /dev/null 2>&1 || {
 # If settings.json exists, merge the configuration
 if [ -f "$SETTINGS_FILE" ]; then
     echo "📦 Merging with existing VS Code settings..."
-    # Create temporary file with merged settings
+    # Create temporary file with PSI config
+    PSI_CONFIG_TEMP=$(mktemp)
+    echo "$PSI_HEADER_CONFIG" > "$PSI_CONFIG_TEMP"
+    
+    # Merge using Python
     python3 << PYTHON_MERGE
 import json
 import os
 
 settings_file = "$SETTINGS_FILE"
-psi_config = $PSI_HEADER_CONFIG
+psi_config_file = "$PSI_CONFIG_TEMP"
+
+# Load PSI config from temp file
+with open(psi_config_file, 'r') as f:
+    psi_config = json.load(f)
 
 try:
     with open(settings_file, 'r') as f:
@@ -230,6 +254,9 @@ with open(settings_file, 'w') as f:
 
 print("✅ Settings merged successfully")
 PYTHON_MERGE
+    
+    # Cleanup temp file
+    rm -f "$PSI_CONFIG_TEMP"
 else
     echo "📝 Creating new VS Code settings file..."
     echo "$PSI_HEADER_CONFIG" | python3 -m json.tool > "$SETTINGS_FILE"
