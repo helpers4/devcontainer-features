@@ -1,35 +1,29 @@
 {
   "id": "local-mounts",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "name": "Local Development Files Mount",
-  "description": "Mounts local Git, SSH, GPG, and npm configuration files into the devcontainer for seamless development authentication.",
+  "description": "Mounts local Git, SSH, GPG, and npm configuration files into the devcontainer at /home/node for the 'node' user. Provides seamless development authentication.",
   "documentationURL": "https://github.com/helpers4/devcontainer/tree/main/src/local-mounts",
-  "options": {
-    "username": {
-      "type": "string",
-      "default": "node",
-      "description": "The username in the container to mount files for"
-    }
-  },
+  "options": {},
   "mounts": [
     {
       "source": "${localEnv:HOME}/.gitconfig",
-      "target": "/home/${containerEnv:USERNAME:-node}/.gitconfig",
+      "target": "/home/node/.gitconfig",
       "type": "bind"
     },
     {
       "source": "${localEnv:HOME}/.ssh",
-      "target": "/home/${containerEnv:USERNAME:-node}/.ssh",
+      "target": "/home/node/.ssh",
       "type": "bind"
     },
     {
       "source": "${localEnv:HOME}/.gnupg",
-      "target": "/home/${containerEnv:USERNAME:-node}/.gnupg",
+      "target": "/home/node/.gnupg",
       "type": "bind"
     },
     {
       "source": "${localEnv:HOME}/.npmrc",
-      "target": "/home/${containerEnv:USERNAME:-node}/.npmrc",
+      "target": "/home/node/.npmrc",
       "type": "bind"
     },
     {
