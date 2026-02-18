@@ -99,6 +99,20 @@ Complete TypeScript/JavaScript development setup with Git integration, AI assist
 
 [📖 Documentation](./src/typescript-dev/README.md)
 
+### auto-header
+
+Automatically configures file headers with customizable templates based on project, license, company, and contributors information.
+
+**Key benefits:**
+- Two header styles: simple (3 lines) and custom (user-defined)
+- Flexible configuration with project name, license, company, and contributors
+- Helper script `h4-init-headers` for easy initialization
+- SPDX compliant license identifiers
+- Works in VS Code with zero configuration needed after setup
+- Perfect for maintaining consistent file headers across team projects
+
+[📖 Documentation](./src/auto-header/README.md)
+
 ## Usage
 
 Features from this repository are available via GitHub Container Registry. Reference them in your `devcontainer.json`:
@@ -109,6 +123,9 @@ Features from this repository are available via GitHub Container Registry. Refer
         "ghcr.io/helpers4/devcontainer/vite-plus:1": {},
         "ghcr.io/helpers4/devcontainer/package-auto-install:1": {},
         "ghcr.io/helpers4/devcontainer/typescript-dev:1": {},
+        "ghcr.io/helpers4/devcontainer/auto-header:1": {
+            "projectName": "my-project"
+        },
         "ghcr.io/helpers4/devcontainer/angular-dev:1": {},
         "ghcr.io/helpers4/devcontainer/shell-history-per-project:1": {},
         "ghcr.io/helpers4/devcontainer/git-absorb:1": {},
@@ -121,7 +138,8 @@ Features from this repository are available via GitHub Container Registry. Refer
 
 | Feature | Description | Documentation |
 |---------|-------------|---------------|
-| [vite-plus](./src/vite-plus) | Complete Vite+ toolchain with Oxc, Vitest, and VS Code integration | [README](./src/vite-plus/README.md) |
+| [vuto-header](./src/auto-header) | Automatic file headers with customizable templates (simple or custom) | [README](./src/auto-header/README.md) |
+| [aite-plus](./src/vite-plus) | Complete Vite+ toolchain with Oxc, Vitest, and VS Code integration | [README](./src/vite-plus/README.md) |
 | [package-auto-install](./src/package-auto-install) | Automatic package installation with corepack support for Node 24+ | [README](./src/package-auto-install/README.md) |
 | [typescript-dev](./src/typescript-dev) | Complete TypeScript/JavaScript dev environment with Git, AI, and Markdown support | [README](./src/typescript-dev/README.md) |
 | [angular-dev](./src/angular-dev) | Angular development environment with extensions and CLI autocompletion | [README](./src/angular-dev/README.md) |
